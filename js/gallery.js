@@ -1,127 +1,97 @@
 const images = [
   {
     preview:
-      'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg',
+      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg",
     original:
-      'https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg',
-    description: 'Hokkaido Flower',
+      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg",
+    description: "Hokkaido Flower",
   },
   {
     preview:
-      'https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677__340.jpg',
+      "https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677__340.jpg",
     original:
-      'https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677_1280.jpg',
-    description: 'Container Hagalleryage Freight',
+      "https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677_1280.jpg",
+    description: "Container Haulage Freight",
   },
   {
     preview:
-      'https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785__340.jpg',
+      "https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785__340.jpg",
     original:
-      'https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785_1280.jpg',
-    description: 'Aerial Beach View',
+      "https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785_1280.jpg",
+    description: "Aerial Beach View",
   },
   {
     preview:
-      'https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619__340.jpg',
+      "https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619__340.jpg",
     original:
-      'https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619_1280.jpg',
-    description: 'Flower Blooms',
+      "https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619_1280.jpg",
+    description: "Flower Blooms",
   },
   {
     preview:
-      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334__340.jpg',
+      "https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334__340.jpg",
     original:
-      'https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_1280.jpg',
-    description: 'Alpine Mountains',
+      "https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_1280.jpg",
+    description: "Alpine Mountains",
   },
   {
     preview:
-      'https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571__340.jpg',
+      "https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571__340.jpg",
     original:
-      'https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571_1280.jpg',
-    description: 'Mountain Lake Sailing',
+      "https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571_1280.jpg",
+    description: "Mountain Lake Sailing",
   },
   {
     preview:
-      'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272__340.jpg',
+      "https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272__340.jpg",
     original:
-      'https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg',
-    description: 'Alpine Spring Meadows',
+      "https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg",
+    description: "Alpine Spring Meadows",
   },
   {
     preview:
-      'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255__340.jpg',
+      "https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255__340.jpg",
     original:
-      'https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg',
-    description: 'Nature Landscape',
+      "https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg",
+    description: "Nature Landscape",
   },
   {
     preview:
-      'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843__340.jpg',
+      "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843__340.jpg",
     original:
-      'https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg',
-    description: 'Lighthouse Coast Sea',
+      "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg",
+    description: "Lighthouse Coast Sea",
   },
 ];
 
-const gallery = document.querySelector('.gallery');
-gallery.style.display = 'flex';
-gallery.style.flexWrap = 'wrap';
-gallery.style.gap = '24px';
-gallery.style.listStyle = 'none';
-gallery.style.maxWidth = '1128px';
-gallery.style.margin = 'auto';
-gallery.style.padding = '24px';
+// ______________________>>>>
 
-const fragment = document.createDocumentFragment();
+const gallery = document.querySelector(".gallery");
 
-images.forEach((image) => {
-  const li = document.createElement('li');
-  li.classList.add('gallery-item');
-  li.style.width = 'calc((100% - 48px) / 3)';
+const galleryMarkup = images
+  .map(
+    ({ preview, original, description }) => `
+    <li class="gallery-item">
+        <a class="gallery-link" href="${original}">
+            <img class="gallery-image" src="${preview}" data-source="${original}" alt="${description}">
+        </a>
+    </li>
+`
+  )
+  .join("");
 
-  const link = document.createElement('a');
-  link.classList.add('gallery-link');
-  link.href = image.original;
+gallery.innerHTML = galleryMarkup;
 
-  const img = document.createElement('img');
-  img.classList.add('gallery-image');
-  img.src = image.preview;
-  img.alt = image.description;
-  img.width = 360;
-  img.height = 200;
-  img.style.transition = 'transform 0.2s ease';
-  img.setAttribute('data-source', image.original);
+gallery.addEventListener("click", (event) => {
+  event.preventDefault();
 
-  link.appendChild(img);
-  li.appendChild(link);
-  fragment.appendChild(li);
-});
+  const target = event.target;
+  if (target.nodeName !== "IMG") return;
 
-gallery.appendChild(fragment);
+  const largeImageURL = target.dataset.source;
+  const instance = basicLightbox.create(`
+        <img src="${largeImageURL}" width="1112" height="640">
+    `);
 
-gallery.addEventListener('mouseover', (event) => {
-  if (event.target && event.target.nodeName === 'IMG') {
-    event.target.style.transform = 'scale(1.1)';
-  }
-});
-
-gallery.addEventListener('mouseout', (event) => {
-  if (event.target && event.target.nodeName === 'IMG') {
-    event.target.style.transform = 'scale(1)';
-  }
-});
-
-gallery.addEventListener('click', (event) => {
-  if (event.target.nodeName === 'IMG') {
-    event.preventDefault();
-    console.log(event.target.parentElement.href);
-    basicLightbox
-      .create(
-        `
-			<img src="${event.target.parentElement.href}" width="1112" height="640">
-			`
-      )
-      .show();
-  }
+  instance.show();
 });
